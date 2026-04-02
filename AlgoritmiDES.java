@@ -12,8 +12,29 @@ public class AlgoritmiDES {
             KeyGenerator keygen = KeyGenerator.getInstance("DES");
             SecretKey celesi = keygen.generateKey();
             System.out.println("Procesi Filloi");
-            
-        } catch (Exception e) { e.printStackTrace(); }
+
+            String plainteksti = "Informatike e Aplikuar!";
+            String tekstiEnkriptuar = enkriptoTekst(plainteksti, celesi);
+            String tekstiDekriptuar = dekriptoTekst(tekstiEnkriptuar, celesi);
+
+            System.out.println("\nTeksti");
+            System.out.println("Teksti Origjinal: " + plainteksti);
+            System.out.println("Teksti i Enkriptuar: " + tekstiEnkriptuar);
+            System.out.println("Teksti i Dekriptuar: " + tekstiDekriptuar);
+        } catch (Exception e) 
+        { e.printStackTrace(); 
+
+        }
+    }
+     public static String enkriptoTekst(String data, SecretKey key) throws Exception {
+        byte[] enkriptuar = operacioniCipher(data.getBytes(), key, Cipher.ENCRYPT_MODE);
+        return Base64.getEncoder().encodeToString(enkriptuar);
+    }
+
+    public static String dekriptoTekst(String encryptedData, SecretKey key) throws Exception {
+        byte[] dekoduar = Base64.getDecoder().decode(encryptedData);
+        byte[] dekriptuar = operacioniCipher(dekoduar, key, Cipher.DECRYPT_MODE);
+        return new String(dekriptuar);
     }
 
     private static byte[] operacioniCipher(byte[] data, SecretKey key, int mode) throws Exception {
@@ -22,3 +43,11 @@ public class AlgoritmiDES {
         return cipher.doFinal(data);
     }
 }
+     
+    
+  
+
+ 
+    
+
+
