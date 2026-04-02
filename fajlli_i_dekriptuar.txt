@@ -1,0 +1,1 @@
+Ky eshte teksti qe ndodhet brenda file dhe do te enkriptohet me DES.
